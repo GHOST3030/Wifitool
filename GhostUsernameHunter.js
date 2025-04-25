@@ -71,7 +71,7 @@ function generateUsername() {
     for (let _ = 0; _ < count; _++) {
     let serverOnline= await checkServerConnection(url);
    while(!serverOnline){
-  console.log(chalk.green(`[+] wait for online `));
+  console.log(chalk.green(`[+] wait for connect please check from Network `));
   await delay(5000);
   checkServerConnection(url);
    
