@@ -73,7 +73,8 @@ function generateUsername() {
    while(!serverOnline){
   console.log(chalk.green(`[+] wait for connect please check from Network `));
   await delay(5000);
-  checkServerConnection(url);
+serverOnline = await checkServerConnection(url);
+  
    
    }
  const  startt=Date.now();
