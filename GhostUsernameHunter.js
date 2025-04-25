@@ -22,18 +22,22 @@ let {
     count
 } = config;
 
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+async function checkServerConnection(url) {
+    try {
+        await axios.get(url, { timeout: 5000 });
+        return true;
+    } catch (err) {
+        return false;
+    }
+}
+
+
 let randomPartLength = length - prefix.length - suffix.length;
 let tested = new Set();
 
-// تحميل اليوزرات من usernames.txt
-/*if (fs.existsSync('usernames.txt')) {
-    const usernames = fs.readFileSync('usernames.txt', 'utf-8')
-        .split(/\r?\n/)
-        .filter(line => line.trim() !== '');
-    usernames.forEach(username => tested.add(username));
-}*/
-
-// تحميل اليوزرات التي تم تجربتها مسبقًا
 if (fs.existsSync('tested_usernames.txt')) {
     const oldTested = fs.readFileSync('tested_usernames.txt', 'utf-8')
         .split(/\r?\n/)
@@ -42,9 +46,7 @@ if (fs.existsSync('tested_usernames.txt')) {
 }
 
 let i = 0;
-//console.log(chalk.cyan("=".repeat(50)));
-//console.log(chalk.green("         Username Testing Tool"));
-//console.log(chalk.cyan("=".repeat(50)));
+
 console.log(chalk.cyan("=".repeat(60)));
 console.log(chalk.green(`             ${TOOL_NAME}`));
 console.log(chalk.cyan("=".repeat(60)));
@@ -67,6 +69,13 @@ function generateUsername() {
 
 (async function run() {
     for (let _ = 0; _ < count; _++) {
+    let serverOnline= await checkServerConnection(url);
+   while(!serverOnline){
+  console.log(chalk.green(`[+] wait for online `));
+  await delay(5000);
+  checkServerConnection(url);
+   
+   }
  const  startt=Date.now();
         const newModified = fs.statSync(CONFIG_FILE).mtimeMs;
         if (newModified !== lastModified) {

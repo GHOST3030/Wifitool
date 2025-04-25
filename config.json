@@ -1,10 +1,10 @@
 {
-  "url": "http://f.com/login",
-  "logout_url": "http://f.com/logout?erase-cookie=on",
-  "method": "POST",
-  "length":8,
-  "digits": "0123456789",
-  "prefix": "08",
-  "suffix": "",
-  "count": 9000
+  "url": "msfconsole",
+  "logout_url": "hhh",
+  "method": "get",
+  "length": 88,
+  "digits": "2",
+  "prefix": "2",
+  "suffix": "2",
+  "count": 200
 }
