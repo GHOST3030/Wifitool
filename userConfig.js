@@ -1,45 +1,58 @@
-const fs = require('fs');
-const readline = require('readline');
+import enquirer from 'enquirer';
+const { Select, Input } = enquirer;
+import fs from 'fs';
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+// قراءة الإعدادات الموجودة
+let config = {};
+const configPath = './config.json';
 
-// Function to ask questions
-function askQuestion(query) {
-    return new Promise(resolve => rl.question(query, resolve));
+if (fs.existsSync(configPath)) {
+    config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+} else {
+    console.log('[-] No config found. Starting fresh.');
+}
+// دالة لتحديث الإعداد
+async function modifyConfig() {
+    while (true) {
+        const prompt = new Select({
+            name: 'option',
+            message: 'What do you want to modify?',
+            choices: [
+                { name: 'url', message: `URL: ${config.url || 'Not set'}` },
+                { name: 'logout_url', message: `Logout URL: ${config.logout_url || 'Not set'}` },
+                { name: 'method', message: `Method: ${config.method || 'Not set'}` },
+                { name: 'length', message: `Length: ${config.length || 'Not set'}` },
+                { name: 'digits', message: `Digits: ${config.digits || 'Not set'}` },
+                { name: 'prefix', message: `Prefix: ${config.prefix || 'Not set'}` },
+                { name: 'suffix', message: `Suffix: ${config.suffix || 'Not set'}` },
+                { name: 'count', message: `Count: ${config.count || 'Not set'}` },
+                { name: 'save_exit', message: 'Save & Exit' }
+            ]
+        });
+
+        const choice = await prompt.run();
+
+        if (choice === 'save_exit') {
+            fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+            console.log('[+] Config saved successfully.');
+            break;
+        }
+
+        const valuePrompt = new Input({
+            name: 'value',
+            message: `Enter new value for ${choice}:`
+        });
+
+        const newValue = await valuePrompt.run();
+
+        if (['length', 'count'].includes(choice)) {
+            config[choice] = parseInt(newValue);
+        } else {
+            config[choice] = newValue;
+        }
+    }
 }
 
-async function getUserConfig() {
-    const url = await askQuestion('Enter login URL (url): ');
-    const logout_url = await askQuestion('Enter logout URL (logout_url): ');
-    const method = await askQuestion('Enter request method (POST or GET): ');
-    const length = parseInt(await askQuestion('Enter username length (length): '));
-    const digits = await askQuestion('Enter digits for username generation (e.g., 0123456789): ');
-    const prefix = await askQuestion('Enter prefix (prefix): ');
-    const suffix = await askQuestion('Enter suffix (suffix): ');
-    const count = parseInt(await askQuestion('Enter the number of usernames to test (count): '));
-
-    // Save settings to config.json
-    const config = {
-        url,
-        logout_url,
-        method,
-        length,
-        digits,
-        prefix,
-        suffix,
-        count
-    };
-
-    // Write the settings to config.json file
-    fs.writeFileSync('config.json', JSON.stringify(config, null, 2));
-    console.log('[+] Settings have been saved to config.json');
-
-    rl.close();  // Close readline interface after input
-}
-
-// Call the function to start input
-getUserConfig();
+// بدء البرنامج
+modifyConfig();
 
