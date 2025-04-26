@@ -50,7 +50,7 @@ let i = 0;
 console.log(chalk.cyan("=".repeat(60)));
 console.log(chalk.green(`             ${TOOL_NAME}`));
 console.log(chalk.cyan("=".repeat(60)));
-console.log(chalk.green("Developed By Ghost Contact +967776977357"));
+console.log(chalk.green("Developed By Ghost Tele @GHOST_529"));
 console.log(chalk.cyan("=".repeat(50)));
 console.log(chalk.yellow(`Target: ${url}`));
 console.log(chalk.yellow(`Method: ${method}`));
