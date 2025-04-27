@@ -1,6 +1,7 @@
-const fs = require('fs');
-const axios = require('axios');
-const chalk = require('chalk');
+//const fs = require('fs');
+import fs from 'fs';
+import axios from 'axios';
+import chalk from 'chalk';
 const TOOL_NAME = "GhostUsernameHunter"; //name of the tool
 const CONFIG_FILE = 'config.json';
 
