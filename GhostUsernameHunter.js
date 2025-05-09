@@ -2,7 +2,7 @@
 import fs from 'fs';
 import axios from 'axios';
 import chalk from 'chalk';
-const TOOL_NAME = "GhostUsernameHunter"; //name of the tool
+const TOOL_NAME = "UsernameHunter"; //name of the tool
 const CONFIG_FILE = 'config.json';
 
 function loadConfig() {
@@ -51,7 +51,7 @@ let i = 0;
 console.log(chalk.cyan("=".repeat(60)));
 console.log(chalk.green(`             ${TOOL_NAME}`));
 console.log(chalk.cyan("=".repeat(60)));
-console.log(chalk.green("Developed By Ghost Tele @GHOST_529"));
+console.log(chalk.green("Developed By Ghost Telegram @GHOST_529"));
 console.log(chalk.cyan("=".repeat(50)));
 console.log(chalk.yellow(`Target: ${url}`));
 console.log(chalk.yellow(`Method: ${method}`));
