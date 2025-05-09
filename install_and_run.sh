@@ -7,9 +7,6 @@ pkg install nodejs -y
 npm install axios chalk
 
 
-cd Wifitool
-
-
 if [ ! -f package.json ]; then
   npm init -y
 fi
