@@ -1,21 +1,4 @@
 {
-  "name": "wifitool",
-  "type": "module",
-  "version": "1.0.0",
-  "main": "GhostUsernameHunter.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GHOST3030/Wifitool.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/GHOST3030/Wifitool/issues"
-  },
-  "homepage": "https://github.com/GHOST3030/Wifitool#readme",
-  "description": ""
+  "type": "module"
 }
+
