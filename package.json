@@ -1,0 +1,8 @@
+{
+  "name": "hunter-tool",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "play-sound": "^1.1.6"
+  }
+}
